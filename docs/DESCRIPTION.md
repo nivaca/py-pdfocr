@@ -13,6 +13,8 @@ It is free software, under the GNU General Public License, version 3 or
 later. The PDFs are read, drawn and written by PyMuPDF (GNU AGPL 3); the
 text is read by tesseract (Apache License 2.0), which runs as a program of
 its own, and whose models of the languages are under the same license.
+The whole list of the open-source software it uses, with the licence of
+each, is in `docs/THIRD-PARTY.md`.
 
 Nicolas Vaughan is Associate Professor of Literature at the School of Arts
 and Humanities of the Universidad de los Andes, Bogotá, Colombia.

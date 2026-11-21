@@ -5,6 +5,12 @@ and AppImages, are on
 [Codeberg](https://codeberg.org/nivaca/py-pdfocr/releases) and
 [GitHub](https://github.com/nivaca/py-pdfocr/releases).
 
+## 1.0.4 — 2026-11-21
+
+- The open-source software py-pdfocr uses, with the licence of each, is
+  listed in `docs/THIRD-PARTY.md` (in Spanish, `docs/TERCEROS_es.md`), and
+  the READMEs link to it.
+
 ## 1.0.3 — 2026-11-21
 
 The first release.

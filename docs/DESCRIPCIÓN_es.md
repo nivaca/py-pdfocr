@@ -1,4 +1,4 @@
-# py-pdfocr 1.0.3: descripción
+# py-pdfocr 1.0.4: descripción
 
 ## Análisis
 
@@ -48,6 +48,6 @@ Funciona en Linux, macOS y Windows, con Python 3.14 o posterior y tesseract; la 
 
 ## Ambiente
 
-Fue desarrollado en Fedora 45 con uv y Python 3.14. El código está en GitHub (`github.com/nivaca/py-pdfocr`) y en Codeberg (`codeberg.org/nivaca/py-pdfocr`), donde también están las versiones publicadas, con la wheel, el paquete fuente, el ZIP y la AppImage. Se instala con los instaladores de `install/`, con la AppImage o con `uv tool install .`; las pruebas se corren con `uv run pytest`.
+Fue desarrollado en Fedora 45 con uv y Python 3.14. El código está en GitHub (`github.com/nivaca/py-pdfocr`) y en Codeberg (`codeberg.org/nivaca/py-pdfocr`), donde también están las versiones publicadas, con la wheel, el paquete fuente, el ZIP y la AppImage. Se instala con los instaladores de `install/`, con la AppImage o con `uv tool install .`; las pruebas se corren con `uv run pytest`. El software libre que usa, con la licencia de cada uno, está en `docs/TERCEROS_es.md` (en inglés, `docs/THIRD-PARTY.md`).
 
 Los ajustes están en `~/.config/py-pdfocr/config.toml` (en macOS, `~/Library/Application Support/py-pdfocr`; en Windows, `%APPDATA%\py-pdfocr`; la variable `PY_PDFOCR_CONFIG` nombra otra carpeta), y los modelos descargados, en `~/.local/share/py-pdfocr/tessdata` (en Windows, `%LOCALAPPDATA%\py-pdfocr\tessdata`). El contacto del autor es nicolasvaughan@proton.me.

@@ -17,7 +17,7 @@ documents, where it has a window of its own (see "py-pdfocr and
 py-pdftools").
 
 The command line is in English and in Spanish. It runs on Linux, macOS and
-Windows. This is version 1.0.3.
+Windows. This is version 1.0.4.
 
 I am Nicolas Vaughan (<nicolasvaughan@proton.me>), and I wrote it in 2026.
 It is free software, under the GNU General Public License, version 3 or
@@ -37,12 +37,12 @@ documents:
   not on the PATH)
 
 **The AppImage** (Linux) has everything else in it, Python included. Download
-`py-pdfocr-1.0.3-x86_64.AppImage` from the
+`py-pdfocr-1.0.4-x86_64.AppImage` from the
 [releases](https://github.com/nivaca/py-pdfocr/releases), make it
 executable, and run it as the command:
 
-    $ chmod +x py-pdfocr-1.0.3-x86_64.AppImage
-    $ ./py-pdfocr-1.0.3-x86_64.AppImage scan.pdf
+    $ chmod +x py-pdfocr-1.0.4-x86_64.AppImage
+    $ ./py-pdfocr-1.0.4-x86_64.AppImage scan.pdf
 
 **The installers** need Python 3.14 or later. From the source (cloned, or
 the ZIP of a release unpacked):
@@ -179,4 +179,6 @@ Software Foundation, either version 3 of the License, or (at your option)
 any later version (see [LICENSE](LICENSE)). It uses PyMuPDF (GNU AGPL 3),
 and runs tesseract (Apache License 2.0), whose models are under the same
 license. The AppImage includes a Python of the python-appimage project
-(Python Software Foundation License).
+(Python Software Foundation License). The open-source software py-pdfocr
+uses, and the licences of each, are listed in
+[docs/THIRD-PARTY.md](docs/THIRD-PARTY.md).
