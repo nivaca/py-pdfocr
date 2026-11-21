@@ -1,0 +1,97 @@
+# The installers of install/, run on Linux, macOS and Windows: each installs
+# py-pdfocr from this source with Python 3.14, with tesseract (and English)
+# installed as a user would, runs the tests against the program installed,
+# and uninstalls it.
+
+name: installers
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+    paths: ["install/**", "src/**", "tests/**", "pyproject.toml", ".github/workflows/installers.yml"]
+  workflow_dispatch:
+
+jobs:
+  unix:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Tesseract
+        run: |
+          if [ "$RUNNER_OS" = macOS ]; then
+            brew install tesseract
+          else
+            sudo apt-get update -q
+            sudo apt-get install -q -y tesseract-ocr tesseract-ocr-eng
+          fi
+      - name: Install
+        run: bash install/install.sh
+      - name: What it made
+        run: |
+          set -x
+          ~/.local/bin/py-pdfocr --version
+          ~/.local/bin/py-pdfocr languages
+          if [ "$RUNNER_OS" = macOS ]; then
+            venv=~/"Library/Application Support/py-pdfocr/venv"
+          else
+            venv=~/.local/share/py-pdfocr/venv
+          fi
+          echo "VENV=$venv" >> "$GITHUB_ENV"
+      - name: Tests, against the program installed
+        run: |
+          "$VENV/bin/python" -m pip install --quiet pytest
+          "$VENV/bin/python" -m pytest -q -p no:cacheprovider tests
+      - name: Uninstall
+        run: |
+          bash install/install.sh --uninstall
+          test ! -e "$VENV"
+          test ! -e ~/.local/bin/py-pdfocr
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - name: Tesseract (in Program Files, not on the PATH, as its installer leaves it)
+        shell: pwsh
+        run: choco install tesseract -y --no-progress
+      - name: Install (through install.bat, as a user would)
+        shell: cmd
+        run: install\install.bat < nul
+      - name: What it made
+        shell: pwsh
+        run: |
+          $data = Join-Path $env:LOCALAPPDATA "py-pdfocr"
+          $command = Join-Path $data "bin\py-pdfocr.cmd"
+          if (-not (Test-Path $command)) { throw "no py-pdfocr.cmd" }
+          & $command --version
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+          & $command languages
+          $path = [Environment]::GetEnvironmentVariable("Path", "User")
+          if (($path -split ";") -notcontains (Join-Path $data "bin")) { throw "bin is not on the PATH of the user" }
+          "VENV=$(Join-Path $data 'venv')" | Out-File -Append -Encoding utf8 $env:GITHUB_ENV
+      - name: Tests, against the program installed
+        shell: pwsh
+        run: |
+          & "$env:VENV\Scripts\python.exe" -m pip install --quiet pytest
+          & "$env:VENV\Scripts\python.exe" -m pytest -q -p no:cacheprovider tests
+          if ($LASTEXITCODE -ne 0) { exit 1 }
+      - name: Uninstall
+        shell: cmd
+        run: install\install.bat -Uninstall < nul
+      - name: Nothing left
+        shell: pwsh
+        run: |
+          if (Test-Path $env:VENV) { throw "the environment is still there" }
+          $path = [Environment]::GetEnvironmentVariable("Path", "User")
+          if ($path -and ($path -split ";") -contains (Join-Path $env:LOCALAPPDATA "py-pdfocr\bin")) { throw "still on the PATH" }

@@ -1,0 +1,44 @@
+[project]
+name = "py-pdfocr"
+version = "1.0.3"
+description = "Read the text of scanned PDF pages with tesseract and write it under them, from the command line"
+readme = "README.md"
+license = "GPL-3.0-or-later"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Nicolas Vaughan", email = "nicolasvaughan@proton.me" }
+]
+requires-python = ">=3.14"
+keywords = ["pdf", "ocr", "tesseract", "searchable", "scan"]
+classifiers = [
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Natural Language :: English",
+    "Natural Language :: Spanish",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Topic :: Office/Business",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+]
+dependencies = [
+    "pymupdf>=1.26",
+]
+
+[project.urls]
+Homepage = "https://github.com/nivaca/py-pdfocr"
+Source = "https://github.com/nivaca/py-pdfocr"
+
+[project.scripts]
+py-pdfocr = "py_pdfocr.cli:main"
+
+[build-system]
+requires = ["uv_build>=0.10,<0.14"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+]
+
+[tool.pytest.ini_options]
+filterwarnings = ["ignore:'typing.ByteString':DeprecationWarning"]

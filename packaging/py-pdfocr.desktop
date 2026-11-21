@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=py-pdfocr
+Comment=Read the text of scanned PDF pages with tesseract
+Exec=py-pdfocr
+Icon=py-pdfocr
+Terminal=true
+NoDisplay=true
+Categories=Office;
+Keywords=pdf;ocr;tesseract;scan;

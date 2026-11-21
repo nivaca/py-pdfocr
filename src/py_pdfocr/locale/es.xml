@@ -1,0 +1,1129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<interface code="es" name="Spanish" native="Español">
+  <!-- The texts of py-pdfocr -->
+  <text>
+    <en>'py-pdfocr languages --all' shows those that can be downloaded too.</en>
+    <tr>'py-pdfocr languages --all' muestra también los que se pueden descargar.</tr>
+  </text>
+  <text>
+    <en>(of {total})</en>
+    <tr>(de {total})</tr>
+  </text>
+  <text>
+    <en>(the one installed with tesseract is used again)</en>
+    <tr>(se vuelve a usar el que vino con tesseract)</tr>
+  </text>
+  <text>
+    <en>--doubtful must be between 0 and 100</en>
+    <tr>--doubtful debe estar entre 0 y 100</tr>
+  </text>
+  <text>
+    <en>--dpi must be between 72 and 1200</en>
+    <tr>--dpi debe estar entre 72 y 1200</tr>
+  </text>
+  <text>
+    <en>--jobs must be 1 or more</en>
+    <tr>--jobs debe ser 1 o más</tr>
+  </text>
+  <text>
+    <en>-o names one file: with several PDFs, use --output-dir or -i</en>
+    <tr>-o nombra un solo archivo: con varios PDF, use --output-dir o -i</tr>
+  </text>
+  <text>
+    <en>a language, as tesseract names it (lat, spa, osd…)</en>
+    <tr>un idioma, como lo nombra tesseract (lat, spa, osd…)</tr>
+  </text>
+  <text>
+    <en>a margin, in millimetres</en>
+    <tr>un margen, en milímetros</tr>
+  </text>
+  <text>
+    <en>a picture (PNG, JPEG, TIFF…)</en>
+    <tr>una imagen (PNG, JPEG, TIFF…)</tr>
+  </text>
+  <text>
+    <en>Afrikaans</en>
+    <tr>Afrikáans</tr>
+  </text>
+  <text>
+    <en>Albanian</en>
+    <tr>Albanés</tr>
+  </text>
+  <text>
+    <en>also the languages that can be downloaded</en>
+    <tr>también los idiomas que se pueden descargar</tr>
+  </text>
+  <text>
+    <en>Amharic</en>
+    <tr>Amárico</tr>
+  </text>
+  <text>
+    <en>Ancient Greek</en>
+    <tr>Griego antiguo</tr>
+  </text>
+  <text>
+    <en>Arabic</en>
+    <tr>Árabe</tr>
+  </text>
+  <text>
+    <en>Armenian</en>
+    <tr>Armenio</tr>
+  </text>
+  <text>
+    <en>Assamese</en>
+    <tr>Asamés</tr>
+  </text>
+  <text>
+    <en>Azerbaijani</en>
+    <tr>Azerí</tr>
+  </text>
+  <text>
+    <en>Basque</en>
+    <tr>Vasco</tr>
+  </text>
+  <text>
+    <en>Belarusian</en>
+    <tr>Bielorruso</tr>
+  </text>
+  <text>
+    <en>Bengali</en>
+    <tr>Bengalí</tr>
+  </text>
+  <text>
+    <en>Better model</en>
+    <tr>Modelo mejor</tr>
+  </text>
+  <text>
+    <en>Better models of py-pdftools: {path}</en>
+    <tr>Modelos mejores de py-pdftools: {path}</tr>
+  </text>
+  <text>
+    <en>Better models: {path}</en>
+    <tr>Modelos mejores: {path}</tr>
+  </text>
+  <text>
+    <en>Bosnian</en>
+    <tr>Bosnio</tr>
+  </text>
+  <text>
+    <en>Breton</en>
+    <tr>Bretón</tr>
+  </text>
+  <text>
+    <en>Bulgarian</en>
+    <tr>Búlgaro</tr>
+  </text>
+  <text>
+    <en>Burmese</en>
+    <tr>Birmano</tr>
+  </text>
+  <text>
+    <en>Catalan</en>
+    <tr>Catalán</tr>
+  </text>
+  <text>
+    <en>Cebuano</en>
+    <tr>Cebuano</tr>
+  </text>
+  <text>
+    <en>Cherokee</en>
+    <tr>Cheroqui</tr>
+  </text>
+  <text>
+    <en>Chinese (simplified)</en>
+    <tr>Chino (simplificado)</tr>
+  </text>
+  <text>
+    <en>Chinese (traditional)</en>
+    <tr>Chino (tradicional)</tr>
+  </text>
+  <text>
+    <en>Code</en>
+    <tr>Código</tr>
+  </text>
+  <text>
+    <en>CODE</en>
+    <tr>CÓDIGO</tr>
+  </text>
+  <text>
+    <en>COMMAND</en>
+    <tr>ORDEN</tr>
+  </text>
+  <text>
+    <en>CONFIDENCE</en>
+    <tr>CONFIANZA</tr>
+  </text>
+  <text>
+    <en>Configuration file: {path}</en>
+    <tr>Archivo de configuración: {path}</tr>
+  </text>
+  <text>
+    <en>Corsican</en>
+    <tr>Corso</tr>
+  </text>
+  <text>
+    <en>Could not keep the setting: {error}</en>
+    <tr>No se pudo guardar la configuración: {error}</tr>
+  </text>
+  <text>
+    <en>Croatian</en>
+    <tr>Croata</tr>
+  </text>
+  <text>
+    <en>Czech</en>
+    <tr>Checo</tr>
+  </text>
+  <text>
+    <en>Danish</en>
+    <tr>Danés</tr>
+  </text>
+  <text>
+    <en>Dhivehi</en>
+    <tr>Divehi</tr>
+  </text>
+  <text>
+    <en>do not show how far the reading has got</en>
+    <tr>no mostrar cuánto se ha leído</tr>
+  </text>
+  <text>
+    <en>download or update tesseract's most accurate models of languages</en>
+    <tr>descargar o actualizar los modelos más precisos de tesseract para unos idiomas</tr>
+  </text>
+  <text>
+    <en>Download tesseract's most accurate models (tessdata_best) of these languages, or download them again to update them, into py-pdfocr's own folder; osd is the model that finds how pages lie (--rotate). Needs the internet.</en>
+    <tr>Descarga los modelos más precisos de tesseract (tessdata_best) de estos idiomas, o los descarga de nuevo para actualizarlos, en la carpeta propia de py-pdfocr; osd es el modelo que averigua cómo están puestas las páginas (--rotate). Necesita internet.</tr>
+  </text>
+  <text>
+    <en>Downloaded {path}</en>
+    <tr>Descargado {path}</tr>
+  </text>
+  <text>
+    <en>Downloading {name}…</en>
+    <tr>Descargando {name}…</tr>
+  </text>
+  <text>
+    <en>Dutch</en>
+    <tr>Neerlandés</tr>
+  </text>
+  <text>
+    <en>Dzongkha</en>
+    <tr>Dzongkha</tr>
+  </text>
+  <text>
+    <en>English</en>
+    <tr>Inglés</tr>
+  </text>
+  <text>
+    <en>Equations</en>
+    <tr>Ecuaciones</tr>
+  </text>
+  <text>
+    <en>Esperanto</en>
+    <tr>Esperanto</tr>
+  </text>
+  <text>
+    <en>Estonian</en>
+    <tr>Estonio</tr>
+  </text>
+  <text>
+    <en>Faroese</en>
+    <tr>Feroés</tr>
+  </text>
+  <text>
+    <en>FILE</en>
+    <tr>ARCHIVO</tr>
+  </text>
+  <text>
+    <en>Filipino</en>
+    <tr>Filipino</tr>
+  </text>
+  <text>
+    <en>Finnish</en>
+    <tr>Finés</tr>
+  </text>
+  <text>
+    <en>FOLDER</en>
+    <tr>CARPETA</tr>
+  </text>
+  <text>
+    <en>French</en>
+    <tr>Francés</tr>
+  </text>
+  <text>
+    <en>Frisian</en>
+    <tr>Frisón</tr>
+  </text>
+  <text>
+    <en>Galician</en>
+    <tr>Gallego</tr>
+  </text>
+  <text>
+    <en>Georgian</en>
+    <tr>Georgiano</tr>
+  </text>
+  <text>
+    <en>German</en>
+    <tr>Alemán</tr>
+  </text>
+  <text>
+    <en>German (Fraktur)</en>
+    <tr>Alemán (fraktur)</tr>
+  </text>
+  <text>
+    <en>Greek</en>
+    <tr>Griego</tr>
+  </text>
+  <text>
+    <en>Gujarati</en>
+    <tr>Guyaratí</tr>
+  </text>
+  <text>
+    <en>Haitian</en>
+    <tr>Haitiano</tr>
+  </text>
+  <text>
+    <en>Hebrew</en>
+    <tr>Hebreo</tr>
+  </text>
+  <text>
+    <en>Hindi</en>
+    <tr>Hindi</tr>
+  </text>
+  <text>
+    <en>how many pages are read at once (by default, half the processors)</en>
+    <tr>cuántas páginas se leen a la vez (por omisión, la mitad de los procesadores)</tr>
+  </text>
+  <text>
+    <en>Hungarian</en>
+    <tr>Húngaro</tr>
+  </text>
+  <text>
+    <en>Icelandic</en>
+    <tr>Islandés</tr>
+  </text>
+  <text>
+    <en>Indonesian</en>
+    <tr>Indonesio</tr>
+  </text>
+  <text>
+    <en>Interface: {name}</en>
+    <tr>Interfaz: {name}</tr>
+  </text>
+  <text>
+    <en>Inuktitut</en>
+    <tr>Inuktitut</tr>
+  </text>
+  <text>
+    <en>Irish</en>
+    <tr>Irlandés</tr>
+  </text>
+  <text>
+    <en>Italian</en>
+    <tr>Italiano</tr>
+  </text>
+  <text>
+    <en>Japanese</en>
+    <tr>Japonés</tr>
+  </text>
+  <text>
+    <en>Japanese (vertical)</en>
+    <tr>Japonés (vertical)</tr>
+  </text>
+  <text>
+    <en>Javanese</en>
+    <tr>Javanés</tr>
+  </text>
+  <text>
+    <en>Kannada</en>
+    <tr>Canarés</tr>
+  </text>
+  <text>
+    <en>Kazakh</en>
+    <tr>Kazajo</tr>
+  </text>
+  <text>
+    <en>Khmer</en>
+    <tr>Jemer</tr>
+  </text>
+  <text>
+    <en>Korean</en>
+    <tr>Coreano</tr>
+  </text>
+  <text>
+    <en>Korean (vertical)</en>
+    <tr>Coreano (vertical)</tr>
+  </text>
+  <text>
+    <en>Kurmanji</en>
+    <tr>Kurmanyi</tr>
+  </text>
+  <text>
+    <en>Kyrgyz</en>
+    <tr>Kirguís</tr>
+  </text>
+  <text>
+    <en>Language</en>
+    <tr>Idioma</tr>
+  </text>
+  <text>
+    <en>LANGUAGES</en>
+    <tr>IDIOMAS</tr>
+  </text>
+  <text>
+    <en>Languages of the interface:</en>
+    <tr>Idiomas de la interfaz:</tr>
+  </text>
+  <text>
+    <en>Languages of the text: {languages}</en>
+    <tr>Idiomas del texto: {languages}</tr>
+  </text>
+  <text>
+    <en>Lao</en>
+    <tr>Lao</tr>
+  </text>
+  <text>
+    <en>Latin</en>
+    <tr>Latín</tr>
+  </text>
+  <text>
+    <en>Latvian</en>
+    <tr>Letón</tr>
+  </text>
+  <text>
+    <en>list the doubtful words (page, confidence, word), to be checked</en>
+    <tr>listar las palabras dudosas (página, confianza, palabra), para revisarlas</tr>
+  </text>
+  <text>
+    <en>Lithuanian</en>
+    <tr>Lituano</tr>
+  </text>
+  <text>
+    <en>Luxembourgish</en>
+    <tr>Luxemburgués</tr>
+  </text>
+  <text>
+    <en>Macedonian</en>
+    <tr>Macedonio</tr>
+  </text>
+  <text>
+    <en>make a PDF of pictures (photographs, scans), and read its text</en>
+    <tr>hacer un PDF de imágenes (fotografías, escaneos) y leer su texto</tr>
+  </text>
+  <text>
+    <en>Make a PDF of pictures (photographs, scans): a page for each, in the order given, as big as the picture or on paper of a size; then read its text with tesseract and write it under the pictures (unless --no-ocr).</en>
+    <tr>Hace un PDF de imágenes (fotografías, escaneos): una página por cada una, en el orden dado, del tamaño de la imagen o en papel de un tamaño; luego lee su texto con tesseract y lo escribe bajo las imágenes (salvo con --no-ocr).</tr>
+  </text>
+  <text>
+    <en>Malay</en>
+    <tr>Malayo</tr>
+  </text>
+  <text>
+    <en>Malayalam</en>
+    <tr>Malabar</tr>
+  </text>
+  <text>
+    <en>Maltese</en>
+    <tr>Maltés</tr>
+  </text>
+  <text>
+    <en>Maori</en>
+    <tr>Maorí</tr>
+  </text>
+  <text>
+    <en>Marathi</en>
+    <tr>Maratí</tr>
+  </text>
+  <text>
+    <en>Middle English</en>
+    <tr>Inglés medio</tr>
+  </text>
+  <text>
+    <en>Middle French</en>
+    <tr>Francés medio</tr>
+  </text>
+  <text>
+    <en>Mongolian</en>
+    <tr>Mongol</tr>
+  </text>
+  <text>
+    <en>NAME</en>
+    <tr>NOMBRE</tr>
+  </text>
+  <text>
+    <en>Nepali</en>
+    <tr>Nepalí</tr>
+  </text>
+  <text>
+    <en>no</en>
+    <tr>no</tr>
+  </text>
+  <text>
+    <en>no language given</en>
+    <tr>no se dio ningún idioma</tr>
+  </text>
+  <text>
+    <en>No language has {text}.</en>
+    <tr>Ningún idioma tiene {text}.</tr>
+  </text>
+  <text>
+    <en>No language is there.</en>
+    <tr>No hay ningún idioma.</tr>
+  </text>
+  <text>
+    <en>none</en>
+    <tr>ninguno</tr>
+  </text>
+  <text>
+    <en>Norwegian</en>
+    <tr>Noruego</tr>
+  </text>
+  <text>
+    <en>Occitan</en>
+    <tr>Occitano</tr>
+  </text>
+  <text>
+    <en>Odia</en>
+    <tr>Oriya</tr>
+  </text>
+  <text>
+    <en>Old Georgian</en>
+    <tr>Georgiano antiguo</tr>
+  </text>
+  <text>
+    <en>Old Italian</en>
+    <tr>Italiano antiguo</tr>
+  </text>
+  <text>
+    <en>Old Spanish</en>
+    <tr>Español antiguo</tr>
+  </text>
+  <text>
+    <en>only make the PDF; do not read its text</en>
+    <tr>solo hacer el PDF; no leer su texto</tr>
+  </text>
+  <text>
+    <en>only the languages whose code or name has TEXT</en>
+    <tr>solo los idiomas cuyo código o nombre contenga TEXTO</tr>
+  </text>
+  <text>
+    <en>Orientation and script (osd)</en>
+    <tr>Orientación y escritura (osd)</tr>
+  </text>
+  <text>
+    <en>Orientation of pages (osd): {state}</en>
+    <tr>Orientación de las páginas (osd): {state}</tr>
+  </text>
+  <text>
+    <en>page {page} could not be read: {error}</en>
+    <tr>no se pudo leer la página {page}: {error}</tr>
+  </text>
+  <text>
+    <en>page {page} is out of range (document has {number} pages)</en>
+    <tr>la página {page} está fuera del intervalo (el documento tiene {number} páginas)</tr>
+  </text>
+  <text>
+    <en>PAGES</en>
+    <tr>PÁGINAS</tr>
+  </text>
+  <text>
+    <en>Pashto</en>
+    <tr>Pastún</tr>
+  </text>
+  <text>
+    <en>Password of {path}:</en>
+    <tr>Contraseña de {path}:</tr>
+  </text>
+  <text>
+    <en>PDF</en>
+    <tr>PDF</tr>
+  </text>
+  <text>
+    <en>Persian</en>
+    <tr>Persa</tr>
+  </text>
+  <text>
+    <en>PICTURE</en>
+    <tr>IMAGEN</tr>
+  </text>
+  <text>
+    <en>Polish</en>
+    <tr>Polaco</tr>
+  </text>
+  <text>
+    <en>Portuguese</en>
+    <tr>Portugués</tr>
+  </text>
+  <text>
+    <en>Punjabi</en>
+    <tr>Panyabí</tr>
+  </text>
+  <text>
+    <en>put each picture on paper of this size</en>
+    <tr>poner cada imagen en papel de este tamaño</tr>
+  </text>
+  <text>
+    <en>Quechua</en>
+    <tr>Quechua</tr>
+  </text>
+  <text>
+    <en>Read the text of the scanned pages of PDFs with tesseract, and write it under their pictures, invisible, so that it can be found, copied and marked. 'py-pdfocr FILE.pdf' reads a PDF (the command read).</en>
+    <tr>Lee con tesseract el texto de las páginas escaneadas de los PDF y lo escribe bajo sus imágenes, invisible, para que se pueda buscar, copiar y marcar. 'py-pdfocr ARCHIVO.pdf' lee un PDF (la orden read).</tr>
+  </text>
+  <text>
+    <en>Read the text of the scanned pages of PDFs with tesseract, and write it under their pictures, invisible, so that it can be found, copied and marked. Pages that have text already are left as they are. Each PDF is written as NAME-ocr.pdf beside it, unless -o, -i or --output-dir say otherwise.</en>
+    <tr>Lee con tesseract el texto de las páginas escaneadas de los PDF y lo escribe bajo sus imágenes, invisible, para que se pueda buscar, copiar y marcar. Las páginas que ya tienen texto se dejan como están. Cada PDF se escribe como NOMBRE-ocr.pdf a su lado, salvo que -o, -i o --output-dir digan otra cosa.</tr>
+  </text>
+  <text>
+    <en>read the text of the scanned pages of PDFs, and write it under them</en>
+    <tr>leer el texto de las páginas escaneadas de los PDF y escribirlo bajo ellas</tr>
+  </text>
+  <text>
+    <en>Reading the scanned pages: {done} of {of}…</en>
+    <tr>Leyendo las páginas escaneadas: {done} de {of}…</tr>
+  </text>
+  <text>
+    <en>remove downloaded models of languages</en>
+    <tr>quitar modelos de idiomas descargados</tr>
+  </text>
+  <text>
+    <en>Remove the more accurate models of these languages downloaded with py-pdfocr; the one installed with tesseract, if any, is used again. The languages installed with tesseract are installed and removed with the system's packages (tesseract-langpack-… on Fedora, tesseract-ocr-… on Debian and Ubuntu).</en>
+    <tr>Quita los modelos más precisos de estos idiomas descargados con py-pdfocr; se vuelve a usar el que vino con tesseract, si lo hay. Los idiomas que vienen con tesseract se instalan y se quitan con los paquetes del sistema (tesseract-langpack-… en Fedora, tesseract-ocr-… en Debian y Ubuntu).</tr>
+  </text>
+  <text>
+    <en>Removed the better model of {name}</en>
+    <tr>Quitado el modelo mejor de {name}</tr>
+  </text>
+  <text>
+    <en>Romanian</en>
+    <tr>Rumano</tr>
+  </text>
+  <text>
+    <en>Run '%(prog)s COMMAND -h' for help on a command.</en>
+    <tr>Ejecute '%(prog)s ORDEN -h' para ver la ayuda de una orden.</tr>
+  </text>
+  <text>
+    <en>Russian</en>
+    <tr>Ruso</tr>
+  </text>
+  <text>
+    <en>Sanskrit</en>
+    <tr>Sánscrito</tr>
+  </text>
+  <text>
+    <en>Scottish Gaelic</en>
+    <tr>Gaélico escocés</tr>
+  </text>
+  <text>
+    <en>Serbian</en>
+    <tr>Serbio</tr>
+  </text>
+  <text>
+    <en>Serbian (Latin)</en>
+    <tr>Serbio (latino)</tr>
+  </text>
+  <text>
+    <en>show or change the settings</en>
+    <tr>mostrar o cambiar los ajustes</tr>
+  </text>
+  <text>
+    <en>show tesseract's version and its languages here</en>
+    <tr>mostrar la versión de tesseract y sus idiomas aquí</tr>
+  </text>
+  <text>
+    <en>Show tesseract's version and the languages it can read here: those installed with it, and the more accurate models downloaded (★). With --all, also those that can be downloaded.</en>
+    <tr>Muestra la versión de tesseract y los idiomas que puede leer aquí: los que vinieron con él y los modelos más precisos descargados (★). Con --all, también los que se pueden descargar.</tr>
+  </text>
+  <text>
+    <en>Show the settings, or change them: the languages of the text read by default, and the language of the interface.</en>
+    <tr>Muestra los ajustes, o los cambia: los idiomas del texto que se lee por omisión y el idioma de la interfaz.</tr>
+  </text>
+  <text>
+    <en>show which pages of PDFs are scans without text</en>
+    <tr>mostrar qué páginas de los PDF son escaneos sin texto</tr>
+  </text>
+  <text>
+    <en>Show which pages of PDFs are scans without text: those that 'read' reads. A page with pictures and no text is a scan.</en>
+    <tr>Muestra qué páginas de los PDF son escaneos sin texto: las que lee 'read'. Una página con imágenes y sin texto es un escaneo.</tr>
+  </text>
+  <text>
+    <en>Sindhi</en>
+    <tr>Sindi</tr>
+  </text>
+  <text>
+    <en>Sinhala</en>
+    <tr>Cingalés</tr>
+  </text>
+  <text>
+    <en>Slovak</en>
+    <tr>Eslovaco</tr>
+  </text>
+  <text>
+    <en>Slovenian</en>
+    <tr>Esloveno</tr>
+  </text>
+  <text>
+    <en>Spanish</en>
+    <tr>Español</tr>
+  </text>
+  <text>
+    <en>Stopped</en>
+    <tr>Detenido</tr>
+  </text>
+  <text>
+    <en>Sundanese</en>
+    <tr>Sundanés</tr>
+  </text>
+  <text>
+    <en>Swahili</en>
+    <tr>Suajili</tr>
+  </text>
+  <text>
+    <en>Swedish</en>
+    <tr>Sueco</tr>
+  </text>
+  <text>
+    <en>Syriac</en>
+    <tr>Siríaco</tr>
+  </text>
+  <text>
+    <en>Tajik</en>
+    <tr>Tayiko</tr>
+  </text>
+  <text>
+    <en>Tamil</en>
+    <tr>Tamil</tr>
+  </text>
+  <text>
+    <en>Tatar</en>
+    <tr>Tártaro</tr>
+  </text>
+  <text>
+    <en>Telugu</en>
+    <tr>Telugu</tr>
+  </text>
+  <text>
+    <en>tesseract failed: {error}</en>
+    <tr>tesseract falló: {error}</tr>
+  </text>
+  <text>
+    <en>tesseract is not installed: there is no OCR</en>
+    <tr>tesseract no está instalado: no hay OCR</tr>
+  </text>
+  <text>
+    <en>Tesseract is not installed: there is no OCR.</en>
+    <tr>Tesseract no está instalado: no hay OCR.</tr>
+  </text>
+  <text>
+    <en>tesseract took too long</en>
+    <tr>tesseract tardó demasiado</tr>
+  </text>
+  <text>
+    <en>Tesseract {version}.</en>
+    <tr>Tesseract {version}.</tr>
+  </text>
+  <text>
+    <en>TEXT</en>
+    <tr>TEXTO</tr>
+  </text>
+  <text>
+    <en>Thai</en>
+    <tr>Tailandés</tr>
+  </text>
+  <text>
+    <en>The interface is now in {name} (kept in {path}).</en>
+    <tr>La interfaz está ahora en {name} (se guarda en {path}).</tr>
+  </text>
+  <text>
+    <en>the language of the interface ({codes})</en>
+    <tr>el idioma de la interfaz ({codes})</tr>
+  </text>
+  <text>
+    <en>the language of the interface, for this run only (to keep a choice, use 'settings --interface')</en>
+    <tr>el idioma de la interfaz, solo para esta ejecución (para conservar una elección, use 'settings --interface')</tr>
+  </text>
+  <text>
+    <en>the language {code} cannot be used: {error}</en>
+    <tr>no se puede usar el idioma {code}: {error}</tr>
+  </text>
+  <text>
+    <en>the language {name} is not installed</en>
+    <tr>el idioma {name} no está instalado</tr>
+  </text>
+  <text>
+    <en>the language {name} is not installed (tesseract has {names}; its better model can be downloaded with: py-pdfocr download {name})</en>
+    <tr>el idioma {name} no está instalado (tesseract tiene {names}; su modelo mejor se puede descargar con: py-pdfocr download {name})</tr>
+  </text>
+  <text>
+    <en>the languages of the text read by default, several with +: lat+spa</en>
+    <tr>los idiomas del texto que se lee por omisión, varios con +: lat+spa</tr>
+  </text>
+  <text>
+    <en>the languages of the text, as tesseract names them, several with +, the main one first: lat+spa (by default, those of the settings: {languages})</en>
+    <tr>los idiomas del texto, como los nombra tesseract, varios con +, el principal primero: lat+spa (por omisión, los de los ajustes: {languages})</tr>
+  </text>
+  <text>
+    <en>The margin leaves no room for the pictures</en>
+    <tr>El margen no deja espacio para las imágenes</tr>
+  </text>
+  <text>
+    <en>the orientation of the pages can't be found: tesseract's osd model is not there (it can be downloaded with: py-pdfocr download osd)</en>
+    <tr>no se puede averiguar la orientación de las páginas: falta el modelo osd de tesseract (se puede descargar con: py-pdfocr download osd)</tr>
+  </text>
+  <text>
+    <en>the pages to read: 1-5,9, LAST ... (by default, all the scanned pages)</en>
+    <tr>las páginas que se leen: 1-5,9, LAST ... (por omisión, todas las escaneadas)</tr>
+  </text>
+  <text>
+    <en>the paper lying</en>
+    <tr>el papel apaisado</tr>
+  </text>
+  <text>
+    <en>the paper standing (else as each picture is)</en>
+    <tr>el papel vertical (si no, como esté cada imagen)</tr>
+  </text>
+  <text>
+    <en>the password of the PDFs, if they have one</en>
+    <tr>la contraseña de los PDF, si la tienen</tr>
+  </text>
+  <text>
+    <en>the password of the PDFs, if they have one (asked for, if not given, on a terminal)</en>
+    <tr>la contraseña de los PDF, si la tienen (en una terminal se pide si no se da)</tr>
+  </text>
+  <text>
+    <en>the PDF made</en>
+    <tr>el PDF hecho</tr>
+  </text>
+  <text>
+    <en>the PDF to write (one input only)</en>
+    <tr>el PDF que se escribe (con una sola entrada)</tr>
+  </text>
+  <text>
+    <en>the PDFs to look at</en>
+    <tr>los PDF que se miran</tr>
+  </text>
+  <text>
+    <en>the PDFs to read</en>
+    <tr>los PDF que se leen</tr>
+  </text>
+  <text>
+    <en>the resolution at which the pages are read, 72 to 1200 (default: %(default)s)</en>
+    <tr>la resolución a la que se leen las páginas, de 72 a 1200 (por omisión: %(default)s)</tr>
+  </text>
+  <text>
+    <en>The settings of py-pdfocr. Delete this file to use the usual values.</en>
+    <tr>Los ajustes de py-pdfocr. Borre este archivo para usar los valores habituales.</tr>
+  </text>
+  <text>
+    <en>There are no pictures</en>
+    <tr>No hay imágenes</tr>
+  </text>
+  <text>
+    <en>there is no such language</en>
+    <tr>no existe ese idioma</tr>
+  </text>
+  <text>
+    <en>Tibetan</en>
+    <tr>Tibetano</tr>
+  </text>
+  <text>
+    <en>Tigrinya</en>
+    <tr>Tigriña</tr>
+  </text>
+  <text>
+    <en>Tongan</en>
+    <tr>Tongano</tr>
+  </text>
+  <text>
+    <en>Turkish</en>
+    <tr>Turco</tr>
+  </text>
+  <text>
+    <en>turn the pages lying sideways or upside down before reading them (needs tesseract's osd model: py-pdfocr download osd)</en>
+    <tr>girar las páginas que están de lado o al revés antes de leerlas (necesita el modelo osd de tesseract: py-pdfocr download osd)</tr>
+  </text>
+  <text>
+    <en>Ukrainian</en>
+    <tr>Ucraniano</tr>
+  </text>
+  <text>
+    <en>Urdu</en>
+    <tr>Urdu</tr>
+  </text>
+  <text>
+    <en>Uyghur</en>
+    <tr>Uigur</tr>
+  </text>
+  <text>
+    <en>Uzbek</en>
+    <tr>Uzbeko</tr>
+  </text>
+  <text>
+    <en>Uzbek (Cyrillic)</en>
+    <tr>Uzbeko (cirílico)</tr>
+  </text>
+  <text>
+    <en>Vietnamese</en>
+    <tr>Vietnamita</tr>
+  </text>
+  <text>
+    <en>Welsh</en>
+    <tr>Galés</tr>
+  </text>
+  <text>
+    <en>With tesseract</en>
+    <tr>Con tesseract</tr>
+  </text>
+  <text>
+    <en>words read with a confidence below this (0 to 100) are doubtful (default: %(default)s)</en>
+    <tr>las palabras leídas con una confianza menor que esta (de 0 a 100) son dudosas (por omisión: %(default)s)</tr>
+  </text>
+  <text>
+    <en>write each PDF over itself</en>
+    <tr>escribir cada PDF sobre sí mismo</tr>
+  </text>
+  <text>
+    <en>write the PDFs into FOLDER, with the same names</en>
+    <tr>escribir los PDF en CARPETA, con los mismos nombres</tr>
+  </text>
+  <text>
+    <en>Wrote {path}</en>
+    <tr>Se escribió {path}</tr>
+  </text>
+  <text>
+    <en>Wrote {path} ({count} pages)</en>
+    <tr>Se escribió {path} ({count} páginas)</tr>
+  </text>
+  <text>
+    <en>yes</en>
+    <tr>sí</tr>
+  </text>
+  <text>
+    <en>Yiddish</en>
+    <tr>Ídish</tr>
+  </text>
+  <text>
+    <en>Yoruba</en>
+    <tr>Yoruba</tr>
+  </text>
+  <text>
+    <en>{count} doubtful word</en>
+    <tr>{count} palabra dudosa</tr>
+  </text>
+  <text>
+    <en>{count} doubtful words</en>
+    <tr>{count} palabras dudosas</tr>
+  </text>
+  <text>
+    <en>{count} language can be read here.</en>
+    <tr>Aquí se puede leer {count} idioma.</tr>
+  </text>
+  <text>
+    <en>{count} languages can be read here.</en>
+    <tr>Aquí se pueden leer {count} idiomas.</tr>
+  </text>
+  <text>
+    <en>{count} page is a scan without text</en>
+    <tr>{count} página es un escaneo sin texto</tr>
+  </text>
+  <text>
+    <en>{count} page read</en>
+    <tr>{count} página leída</tr>
+  </text>
+  <text>
+    <en>{count} page turned</en>
+    <tr>{count} página girada</tr>
+  </text>
+  <text>
+    <en>{count} pages are scans without text</en>
+    <tr>{count} páginas son escaneos sin texto</tr>
+  </text>
+  <text>
+    <en>{count} pages read</en>
+    <tr>{count} páginas leídas</tr>
+  </text>
+  <text>
+    <en>{count} pages turned</en>
+    <tr>{count} páginas giradas</tr>
+  </text>
+  <text>
+    <en>{count} word</en>
+    <tr>{count} palabra</tr>
+  </text>
+  <text>
+    <en>{count} words</en>
+    <tr>{count} palabras</tr>
+  </text>
+  <text>
+    <en>{name} could not be downloaded: {error}</en>
+    <tr>no se pudo descargar {name}: {error}</tr>
+  </text>
+  <text>
+    <en>{name} is not a language of tesseract</en>
+    <tr>{name} no es un idioma de tesseract</tr>
+  </text>
+  <text>
+    <en>{name} was downloaded by py-pdftools: remove it there</en>
+    <tr>{name} lo descargó py-pdftools: quítelo allí</tr>
+  </text>
+  <text>
+    <en>{name} was not downloaded</en>
+    <tr>{name} no se había descargado</tr>
+  </text>
+  <text>
+    <en>{path} cannot be read as a PDF: {error}</en>
+    <tr>{path} no se puede leer como PDF: {error}</tr>
+  </text>
+  <text>
+    <en>{path} cannot be read as a picture: {error}</en>
+    <tr>{path} no se puede leer como imagen: {error}</tr>
+  </text>
+  <text>
+    <en>{path} cannot be written: {error}</en>
+    <tr>No se puede escribir {path}: {error}</tr>
+  </text>
+  <text>
+    <en>{path} is not a PDF</en>
+    <tr>{path} no es un PDF</tr>
+  </text>
+  <text>
+    <en>{path} is not a picture</en>
+    <tr>{path} no es una imagen</tr>
+  </text>
+  <text>
+    <en>{path} is protected by a password</en>
+    <tr>{path} está protegido con contraseña</tr>
+  </text>
+  <text>
+    <en>{path}: no page of those chosen is a scan without text</en>
+    <tr>{path}: ninguna de las páginas elegidas es un escaneo sin texto</tr>
+  </text>
+  <text>
+    <en>{token} is not a page number</en>
+    <tr>{token} no es un número de página</tr>
+  </text>
+  <!-- argparse's own texts -->
+  <text>
+    <en>usage:</en>
+    <tr>uso:</tr>
+  </text>
+  <text>
+    <en>argument %(argument_name)s: %(message)s</en>
+    <tr>argumento %(argument_name)s: %(message)s</tr>
+  </text>
+  <text>
+    <en>show program's version number and exit</en>
+    <tr>mostrar el número de versión del programa y terminar</tr>
+  </text>
+  <text>
+    <en>positional arguments</en>
+    <tr>argumentos posicionales</tr>
+  </text>
+  <text>
+    <en>options</en>
+    <tr>opciones</tr>
+  </text>
+  <text>
+    <en>invalid choice: %(value)r (choose from %(choices)s)</en>
+    <tr>opción no válida: %(value)r (elija entre %(choices)s)</tr>
+  </text>
+  <text>
+    <en>(default: %(default)s)</en>
+    <tr>(por defecto: %(default)s)</tr>
+  </text>
+  <text>
+    <en>can't open '%(filename)s': %(error)s</en>
+    <tr>no se puede abrir '%(filename)s': %(error)s</tr>
+  </text>
+  <text>
+    <en>subcommands</en>
+    <tr>subórdenes</tr>
+  </text>
+  <text>
+    <en>unrecognized arguments: %s</en>
+    <tr>argumentos no reconocidos: %s</tr>
+  </text>
+  <text>
+    <en>ambiguous option: %(option)s could match %(matches)s</en>
+    <tr>opción ambigua: %(option)s podría ser %(matches)s</tr>
+  </text>
+  <text>
+    <en>expected one argument</en>
+    <tr>se esperaba un argumento</tr>
+  </text>
+  <text>
+    <en>expected at most one argument</en>
+    <tr>se esperaba como mucho un argumento</tr>
+  </text>
+  <text>
+    <en>expected at least one argument</en>
+    <tr>se esperaba al menos un argumento</tr>
+  </text>
+  <text>
+    <en>invalid %(type)s value: %(value)r</en>
+    <tr>valor %(type)s no válido: %(value)r</tr>
+  </text>
+  <text>
+    <en>%(heading)s:</en>
+    <tr>%(heading)s:</tr>
+  </text>
+  <text>
+    <en>unknown parser %(parser_name)r (choices: %(choices)s)</en>
+    <tr>analizador desconocido %(parser_name)r (opciones: %(choices)s)</tr>
+  </text>
+  <text>
+    <en>command '%(parser_name)s' is deprecated</en>
+    <tr>la orden '%(parser_name)s' está obsoleta</tr>
+  </text>
+  <text>
+    <en>show this help message and exit</en>
+    <tr>mostrar esta ayuda y terminar</tr>
+  </text>
+  <text>
+    <en>the following arguments are required: %s</en>
+    <tr>se necesitan los argumentos siguientes: %s</tr>
+  </text>
+  <text>
+    <en>one of the arguments %s is required</en>
+    <tr>se necesita uno de los argumentos %s</tr>
+  </text>
+  <text>
+    <en>argument "-" with mode %r</en>
+    <tr>argumento "-" con modo %r</tr>
+  </text>
+  <text>
+    <en>not allowed with argument %s</en>
+    <tr>no se permite con el argumento %s</tr>
+  </text>
+  <text>
+    <en>unexpected option string: %s</en>
+    <tr>cadena de opción inesperada: %s</tr>
+  </text>
+  <text>
+    <en>ignored explicit argument %r</en>
+    <tr>se ignoró el argumento explícito %r</tr>
+  </text>
+  <text>
+    <en>option '%(option)s' is deprecated</en>
+    <tr>la opción '%(option)s' está obsoleta</tr>
+  </text>
+  <text>
+    <en>argument '%(argument_name)s' is deprecated</en>
+    <tr>el argumento '%(argument_name)s' está obsoleto</tr>
+  </text>
+  <text>
+    <en>conflicting option string: %s</en>
+    <tr>cadena de opción en conflicto: %s</tr>
+  </text>
+  <text>
+    <en>conflicting option strings: %s</en>
+    <tr>cadenas de opción en conflicto: %s</tr>
+  </text>
+  <text>
+    <en>expected %s argument</en>
+    <tr>se esperaba %s argumento</tr>
+  </text>
+  <text>
+    <en>expected %s arguments</en>
+    <tr>se esperaban %s argumentos</tr>
+  </text>
+</interface>

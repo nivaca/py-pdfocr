@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <!-- py-pdfocr: a scanned page, its lines of text, and the text found in them -->
+  <path d="M52 20h108l48 48v164a8 8 0 0 1-8 8H52a8 8 0 0 1-8-8V28a8 8 0 0 1 8-8z" fill="#f4f1ea" stroke="#5b5346" stroke-width="6"/>
+  <path d="M160 20v40a8 8 0 0 0 8 8h40" fill="#ddd6c8" stroke="#5b5346" stroke-width="6" stroke-linejoin="round"/>
+  <g stroke="#8a8172" stroke-width="10" stroke-linecap="round">
+    <line x1="72" y1="88" x2="148" y2="88"/>
+    <line x1="72" y1="114" x2="180" y2="114"/>
+    <line x1="72" y1="140" x2="166" y2="140"/>
+  </g>
+  <rect x="62" y="160" width="132" height="34" rx="6" fill="#2f6fb3" opacity="0.18"/>
+  <g stroke="#2f6fb3" stroke-width="10" stroke-linecap="round">
+    <line x1="72" y1="177" x2="184" y2="177"/>
+    <line x1="72" y1="211" x2="132" y2="211"/>
+  </g>
+</svg>
