@@ -140,12 +140,13 @@ def test_download_and_remove(own, capsys, monkeypatch):
 
     monkeypatch.setattr(ocr, "download", download)
     assert cli.main(["download", "lat", "osd"]) == 0
-    assert "osd.traineddata" in capsys.readouterr().out and ocr.has_osd()
+    assert "osd.traineddata" in capsys.readouterr().out and ocr.better("osd")
     assert cli.main(["download", "nope", "spa"]) == 1
     captured = capsys.readouterr()
     assert "no such language" in captured.err and "spa.traineddata" in captured.out
     assert cli.main(["remove", "osd", "lat"]) == 0
-    assert "Removed the better model of osd" in capsys.readouterr().out and not ocr.has_osd()
+    # (the one downloaded is gone; tesseract may have its own osd, which is used again)
+    assert "Removed the better model of osd" in capsys.readouterr().out and not ocr.better("osd")
     assert cli.main(["remove", "osd"]) == 1 and "was not downloaded" in capsys.readouterr().err
 
 
