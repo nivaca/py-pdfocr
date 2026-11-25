@@ -5,6 +5,12 @@ AppImages, están en
 [Codeberg](https://codeberg.org/nivaca/py-pdfocr/releases) y
 [GitHub](https://github.com/nivaca/py-pdfocr/releases).
 
+## Sin publicar
+
+- `tools/zenodo.py`: la descripción del depósito deja fuera la línea que
+  lleva a los README en otras lenguas y la sección Screenshots, cuyas
+  imágenes Zenodo no muestra.
+
 ## 1.0.5 — 2026-11-25
 
 - `tools/zenodo.py`: la descripción del depósito es ahora el README entero
