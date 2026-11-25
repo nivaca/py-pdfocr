@@ -19,7 +19,7 @@ In order, each step only if it is needed:
 1. checks that the repository is on main, with nothing left to commit, that
    the versions agree (pyproject.toml and __init__.py), that the tools are
    installed (gh, tea, gpg), that the signing key is in gpg and, unless
-   --no-zenodo, that there is a Zenodo token in $ZENODO_TOKEN;
+   --no-zenodo, that there is a Zenodo token in $ZENODO_TOKEN or the keyring;
 2. runs the tests, each file in a process of its own, at once
    (tools/test.py; unless --no-tests);
 3. makes the wheel and the source package (uv build), the ZIP of the
@@ -81,6 +81,16 @@ PUBLIC_KEY = "packaging/RPM-GPG-KEY-py-pdfocr"  # (the public key published with
 SUMS = "dist/SHA256SUMS"
 
 
+def zenodo_token() -> bool:
+    """Whether tools/zenodo.py finds a Zenodo token, in $ZENODO_TOKEN or
+    in the desktop keyring (secret-tool)."""
+    tool = os.path.join(os.path.dirname(os.path.dirname(
+        os.path.abspath(__file__))), "tools", "zenodo.py")
+    done = subprocess.run([sys.executable, tool, "check-token"],
+                          capture_output=True, check=False)
+    return done.returncode == 0
+
+
 def init_version() -> str:
     m = re.search(r'^__version__ = "([^"]+)"', (ROOT / "src/py_pdfocr/__init__.py").read_text(), re.MULTILINE)
     return m.group(1) if m else ""
@@ -136,8 +146,8 @@ class Release:
         if not (ROOT / PUBLIC_KEY).is_file():
             sys.exit(f"release.py: there is no {PUBLIC_KEY}, the public key published with the release")
         # (sin token se para aquí, antes de hacer nada, y no al final de la versión)
-        if not self.args.no_zenodo and not self.args.dry_run and not os.environ.get("ZENODO_TOKEN"):
-            sys.exit("release.py: the upload to Zenodo needs a token in $ZENODO_TOKEN (see tools/zenodo.py); "
+        if not self.args.no_zenodo and not self.args.dry_run and not zenodo_token():
+            sys.exit("release.py: the upload to Zenodo needs a token (see tools/zenodo.py check-token); "
                      "--no-zenodo leaves it out")
         if self.args.pypi and not os.environ.get("UV_PUBLISH_TOKEN"):
             sys.exit("release.py: --pypi needs a PyPI API token in $UV_PUBLISH_TOKEN (make one at "
@@ -310,7 +320,7 @@ def main(argv=None):
     parser.add_argument("--tea-login", default="codeberg", help="the login of tea for Codeberg (default: codeberg)")
     parser.add_argument("--no-zenodo", action="store_true",
                         help="don't upload the deposit to Zenodo (by default it goes as a draft, never published, "
-                             "with the token in $ZENODO_TOKEN)")
+                             "with the token in $ZENODO_TOKEN or the keyring)")
     parser.add_argument("-n", "--dry-run", action="store_true", help="only show the commands")
     parser.add_argument("-y", "--yes", action="store_true", help="don't ask before running them")
     args = parser.parse_args(argv)
