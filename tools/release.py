@@ -1,31 +1,49 @@
 #!/usr/bin/env python3
 """Publish a release of py-pdfocr on GitHub (with gh) and Codeberg (with
-tea): the tag vVERSION (the version of pyproject.toml), with the wheel, the
-source package, a ZIP of the source and the AppImage attached, and (--pypi)
-the wheel and the source package on PyPI.
+tea): the tag vVERSION (the version of pyproject.toml), signed, with the wheel,
+the source package, a ZIP of the source and the AppImage attached, each with its
+signature (FILE.asc), with SHA256SUMS and its signature, and with the public key
+that checks them all; the deposit of the release on Zenodo, as a draft; and
+(--pypi) the wheel and the source package on PyPI.
+
+Everything is signed with the project's key (SIGNING_KEY, the same in all the
+author's projects), and every signature is checked, against the public key
+published (packaging/RPM-GPG-KEY-py-pdfocr), before anything is published.
 
     uv run python tools/release.py [--notes TEXT | --notes-file FILE] [--pypi]
                                    [--no-build] [--no-appimage] [--no-tests] [--redo]
-                                   [--only github|codeberg] [--dry-run] [--yes]
+                                   [--only github|codeberg] [--no-zenodo] [--dry-run] [--yes]
 
 In order, each step only if it is needed:
 
 1. checks that the repository is on main, with nothing left to commit, that
-   the versions agree (pyproject.toml and __init__.py) and that the tools are
-   installed (gh, tea);
-2. runs the tests (unless --no-tests);
+   the versions agree (pyproject.toml and __init__.py), that the tools are
+   installed (gh, tea, gpg), that the signing key is in gpg and, unless
+   --no-zenodo, that there is a Zenodo token in $ZENODO_TOKEN;
+2. runs the tests, each file in a process of its own, at once
+   (tools/test.py; unless --no-tests);
 3. makes the wheel and the source package (uv build), the ZIP of the
    source (git archive of HEAD) and the AppImage (tools/bundle-appimage.py)
-   in dist/, unless --no-build (then those in dist/ are used);
-4. tags HEAD as vVERSION. If the tag is already on another commit, it stops,
-   unless --redo moves it;
-5. pushes main and the tag to each remote (origin is GitHub, codeberg is
+   in dist/, unless --no-build (then those in dist/ are used); then signs
+   every file (tools/sign_release.py: FILE.asc, dist/SHA256SUMS and its
+   .asc), and checks each signature with only the public key that is
+   published; gpg asks for the passphrase;
+4. tags HEAD as vVERSION, a tag signed with the same key (git tag --sign),
+   and checks it (git tag --verify). If the tag is already on another
+   commit, it stops, unless --redo moves it;
+5. collects the deposit for Zenodo in dist/zenodo/ (tools/zenodo.py collect:
+   the tree of the tag, signed, with SHA256SUMS and the public key, each
+   signature checked with only that key);
+6. pushes main and the tag to each remote (origin is GitHub, codeberg is
    Codeberg; --redo pushes the tag with --force);
-6. on each forge, makes the release of the tag, or keeps the one there is,
+7. on each forge, makes the release of the tag, or keeps the one there is,
    and attaches the files to it, replacing those of the same name;
-7. with --pypi, uploads the wheel and the source package to PyPI (uv publish,
+8. with --pypi, uploads the wheel and the source package to PyPI (uv publish,
    with the API token in $UV_PUBLISH_TOKEN). PyPI never takes a file twice:
-   with --redo, those already there are skipped, not replaced.
+   with --redo, those already there are skipped, not replaced;
+9. unless --no-zenodo, uploads dist/zenodo/ to Zenodo as a draft
+   (tools/zenodo.py upload). The draft is never published here: review it
+   and publish it on Zenodo by hand.
 
 Before doing anything, it shows the commands it will run and asks; --yes
 doesn't ask, --dry-run only shows them. The notes of a new release are
@@ -56,6 +74,11 @@ SDIST = f"dist/py_pdfocr-{VERSION}.tar.gz"
 ZIP = f"dist/py-pdfocr-{VERSION}.zip"
 APPIMAGE = f"dist/py-pdfocr-{VERSION}-x86_64.AppImage"
 REMOTES = {"github": "origin", "codeberg": "codeberg"}
+# La clave con que se firma todo lo publicado: la misma en todos los proyectos del autor (la que fija
+# packaging/build-rpm.sh en los que hacen un RPM)
+SIGNING_KEY = "81870643CA221AF90C30554EBE6832CD35994948"
+PUBLIC_KEY = "packaging/RPM-GPG-KEY-py-pdfocr"  # (the public key published with every release)
+SUMS = "dist/SHA256SUMS"
 
 
 def init_version() -> str:
@@ -101,10 +124,21 @@ class Release:
     # -------------------------------------------------------------- checks
 
     def check(self):
-        tools = ["git", "uv"] + [t for t, f in (("gh", "github"), ("tea", "codeberg")) if f in self.forges]
+        tools = ["git", "uv", "gpg"] + [t for t, f in (("gh", "github"), ("tea", "codeberg")) if f in self.forges]
         for tool in tools:
             if not shutil.which(tool):
                 sys.exit(f"release.py: {tool} is not installed")
+        # Todo se firma, siempre: sin la clave no hay versión
+        if subprocess.run(["gpg", "--batch", "--list-secret-keys", SIGNING_KEY], capture_output=True,
+                          check=False).returncode != 0:
+            sys.exit(f"release.py: the signing key {SIGNING_KEY} is not in this machine's gpg keyring; import it "
+                     "first")
+        if not (ROOT / PUBLIC_KEY).is_file():
+            sys.exit(f"release.py: there is no {PUBLIC_KEY}, the public key published with the release")
+        # (sin token se para aquí, antes de hacer nada, y no al final de la versión)
+        if not self.args.no_zenodo and not self.args.dry_run and not os.environ.get("ZENODO_TOKEN"):
+            sys.exit("release.py: the upload to Zenodo needs a token in $ZENODO_TOKEN (see tools/zenodo.py); "
+                     "--no-zenodo leaves it out")
         if self.args.pypi and not os.environ.get("UV_PUBLISH_TOKEN"):
             sys.exit("release.py: --pypi needs a PyPI API token in $UV_PUBLISH_TOKEN (make one at "
                      "https://pypi.org/manage/account/token/)")
@@ -135,7 +169,8 @@ class Release:
 
     def tests(self):
         if not self.args.no_tests:
-            self.plan("Run the tests", "uv", "run", "pytest", "-q")
+            # (a la vez, cada archivo en su proceso: tools/test.py)
+            self.plan("Run the tests", "uv", "run", "python", "tools/test.py")
 
     def build(self):
         if self.args.no_build:
@@ -149,19 +184,35 @@ class Release:
         if APPIMAGE in self.files:
             self.plan("Make the AppImage", "uv", "run", "python", "tools/bundle-appimage.py")
 
+    def sign(self):
+        """Every file published signed (FILE.asc), with SHA256SUMS and its signature, and each signature checked
+        with only the public key published."""
+        signed = [f for f in self.files if f != PUBLIC_KEY]
+        self.plan("Sign the files, and check each signature with the published key", sys.executable,
+                  "tools/sign_release.py", "--key", SIGNING_KEY, "--public", PUBLIC_KEY, "--sums", SUMS, *signed)
+        self.files = signed + [f"{f}.asc" for f in signed] + [SUMS, f"{SUMS}.asc", PUBLIC_KEY]
+
     def tag(self):
         head = self.read("git", "rev-parse", "HEAD")
         tagged = self.read("git", "rev-parse", "--verify", "--quiet", f"refs/tags/{TAG}^{{commit}}", check=False)
         if tagged and tagged != head and not self.args.redo:
             sys.exit(f"release.py: {TAG} is already the tag of {tagged[:7]}, not of HEAD ({head[:7]}); --redo "
                      "moves it (and replaces the files of the releases)")
-        if tagged != head:
-            self.plan("Move the tag to HEAD" if tagged else "Tag HEAD", "git", "tag", "--force", "--annotate", TAG,
-                      "--message", TITLE)
+        # Una etiqueta de HEAD de antes de que se firmara todo se firma ahora, y se sube de nuevo, reemplazando la vieja
+        unsigned = tagged == head and subprocess.run(["git", "tag", "--verify", TAG], cwd=ROOT, capture_output=True,
+                                                     check=False).returncode != 0
+        if tagged != head or unsigned:
+            self.plan("Sign the tag of HEAD (it was not signed)" if unsigned
+                      else "Move the tag to HEAD, signed" if tagged else "Tag HEAD, signed", "git", "tag", "--force",
+                      "--sign", "--local-user", SIGNING_KEY, TAG, "--message", TITLE)
+            self.plan("Check the signature of the tag", "git", "tag", "--verify", TAG)
+        # El depósito para Zenodo, de la etiqueta (se sube al final)
+        self.plan("Zenodo: collect the deposit in dist/zenodo/", sys.executable, "tools/zenodo.py", "collect",
+                  "--tag", TAG)
         for forge in self.forges:
             remote = REMOTES[forge]
             self.plan(f"Push {BRANCH} to {remote}", "git", "push", remote, BRANCH)
-            if self.args.redo:
+            if self.args.redo or unsigned:
                 self.plan(f"Push the tag to {remote} (replacing it)", "git", "push", "--force", remote,
                           f"refs/tags/{TAG}")
                 continue
@@ -222,23 +273,28 @@ class Release:
     def __call__(self):
         a = self.args
         self.forges = [a.only] if a.only else ["github", "codeberg"]
-        self.files = [WHEEL, SDIST, ZIP] + ([] if a.no_appimage else [APPIMAGE])
+        self.files = [WHEEL, SDIST, ZIP] + ([] if a.no_appimage else [APPIMAGE]) + [PUBLIC_KEY]
         self.check()
         repos = self.repos()
         self.tests()
         self.build()
+        self.sign()
         self.tag()
         for forge in self.forges:
             getattr(self, forge)(repos[forge])
         if a.pypi:
             self.pypi()
+        if not a.no_zenodo:
+            self.plan("Zenodo: upload the deposit as a draft (not published)", sys.executable, "tools/zenodo.py",
+                      "upload")
         self.run_plan()
 
 
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="tools/release.py",
                                      description=f"Publish {TAG} on GitHub and Codeberg, with the wheel, the source "
-                                                 "package, the ZIP and the AppImage.")
+                                                 "package, the ZIP and the AppImage, all signed, and upload "
+                                                 "its deposit to Zenodo as a draft.")
     notes = parser.add_mutually_exclusive_group()
     notes.add_argument("--notes", metavar="TEXT", help="the notes of a new release")
     notes.add_argument("--notes-file", metavar="FILE", help="the notes of a new release, from FILE")
@@ -252,6 +308,9 @@ def main(argv=None):
                              "replace the files of the releases")
     parser.add_argument("--only", choices=("github", "codeberg"), help="publish on one forge only")
     parser.add_argument("--tea-login", default="codeberg", help="the login of tea for Codeberg (default: codeberg)")
+    parser.add_argument("--no-zenodo", action="store_true",
+                        help="don't upload the deposit to Zenodo (by default it goes as a draft, never published, "
+                             "with the token in $ZENODO_TOKEN)")
     parser.add_argument("-n", "--dry-run", action="store_true", help="only show the commands")
     parser.add_argument("-y", "--yes", action="store_true", help="don't ask before running them")
     args = parser.parse_args(argv)

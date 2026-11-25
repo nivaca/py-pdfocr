@@ -1,0 +1,21 @@
+{
+  "title": "py-pdfocr",
+  "upload_type": "software",
+  "description": "<p>Read the text of scanned PDF pages with tesseract and write it under them, from the command line.</p>",
+  "creators": [
+    {
+      "name": "Vaughan, Nicolas",
+      "affiliation": "Universidad de los Andes",
+      "orcid": "0000-0002-2877-0539"
+    }
+  ],
+  "license": "gpl-3.0-or-later",
+  "access_right": "open",
+  "keywords": [
+    "pdf",
+    "ocr",
+    "tesseract",
+    "searchable",
+    "scan"
+  ]
+}

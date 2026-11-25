@@ -5,6 +5,26 @@ and AppImages, are on
 [Codeberg](https://codeberg.org/nivaca/py-pdfocr/releases) and
 [GitHub](https://github.com/nivaca/py-pdfocr/releases).
 
+## Unreleased
+
+- **Signed releases.** The tag of each release is signed, and every file
+  published has its signature (`FILE.asc`), with `SHA256SUMS`, signed too,
+  and the public key `packaging/RPM-GPG-KEY-py-pdfocr`, all attached to the
+  release. `tools/release.py` signs them (`tools/sign_release.py`) and
+  checks every signature with only that key before anything is published; an
+  unsigned tag already on the commit is signed and pushed again.
+- `tools/zenodo.py` prepares the deposit of a release for Zenodo. `collect`
+  puts in `dist/zenodo/` the tree of the tag as
+  `py-pdfocr-VERSION-source.tar.gz`, with its signature, a signed
+  `SHA256SUMS` of the deposit and the public key, and checks every signature
+  with only that key (`--packages` adds the files of the release). `upload`
+  sends it to Zenodo as a draft, a new version of the deposit if there is
+  one already, and never publishes it. `tools/release.py` now collects the
+  deposit after the tag and uploads it as a draft, unless `--no-zenodo`. The
+  metadata are in `.zenodo.json`.
+- The tests run in parallel, each file in a process of its own
+  (`tools/test.py`), also in the release.
+
 ## 1.0.4 — 2026-11-21
 
 - The open-source software py-pdfocr uses, with the licence of each, is
