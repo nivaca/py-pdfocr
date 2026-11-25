@@ -1,6 +1,6 @@
 [project]
 name = "py-pdfocr"
-version = "1.0.4"
+version = "1.0.5"
 description = "Read the text of scanned PDF pages with tesseract and write it under them, from the command line"
 readme = "README.md"
 license = "GPL-3.0-or-later"

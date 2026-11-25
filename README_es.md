@@ -17,7 +17,7 @@ documentos PDF, donde tiene una ventana propia (véase «py-pdfocr y
 py-pdftools»).
 
 La línea de órdenes está en inglés y en español. Funciona en Linux, macOS y
-Windows. Esta es la versión 1.0.4.
+Windows. Esta es la versión 1.0.5.
 
 Soy Nicolas Vaughan (<nicolasvaughan@proton.me>) y lo escribí en 2026. Es
 software libre, bajo la Licencia Pública General de GNU, versión 3 o
@@ -37,12 +37,12 @@ documentos:
   no esté en el PATH)
 
 **La AppImage** (Linux) trae todo lo demás, Python incluido. Descargue
-`py-pdfocr-1.0.4-x86_64.AppImage` de las
+`py-pdfocr-1.0.5-x86_64.AppImage` de las
 [versiones publicadas](https://github.com/nivaca/py-pdfocr/releases),
 hágala ejecutable y úsela como la orden:
 
-    $ chmod +x py-pdfocr-1.0.4-x86_64.AppImage
-    $ ./py-pdfocr-1.0.4-x86_64.AppImage scan.pdf
+    $ chmod +x py-pdfocr-1.0.5-x86_64.AppImage
+    $ ./py-pdfocr-1.0.5-x86_64.AppImage scan.pdf
 
 **Los instaladores** necesitan Python 3.14 o posterior. Desde el código
 (clonado, o el ZIP de una versión descomprimido):

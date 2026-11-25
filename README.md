@@ -17,7 +17,7 @@ documents, where it has a window of its own (see "py-pdfocr and
 py-pdftools").
 
 The command line is in English and in Spanish. It runs on Linux, macOS and
-Windows. This is version 1.0.4.
+Windows. This is version 1.0.5.
 
 I am Nicolas Vaughan (<nicolasvaughan@proton.me>), and I wrote it in 2026.
 It is free software, under the GNU General Public License, version 3 or
@@ -37,12 +37,12 @@ documents:
   not on the PATH)
 
 **The AppImage** (Linux) has everything else in it, Python included. Download
-`py-pdfocr-1.0.4-x86_64.AppImage` from the
+`py-pdfocr-1.0.5-x86_64.AppImage` from the
 [releases](https://github.com/nivaca/py-pdfocr/releases), make it
 executable, and run it as the command:
 
-    $ chmod +x py-pdfocr-1.0.4-x86_64.AppImage
-    $ ./py-pdfocr-1.0.4-x86_64.AppImage scan.pdf
+    $ chmod +x py-pdfocr-1.0.5-x86_64.AppImage
+    $ ./py-pdfocr-1.0.5-x86_64.AppImage scan.pdf
 
 **The installers** need Python 3.14 or later. From the source (cloned, or
 the ZIP of a release unpacked):

@@ -142,10 +142,35 @@ text is written. py-pdftools keeps the models it downloads in its own
 folder; py-pdfocr uses those too, so that a model is not downloaded twice,
 but only py-pdftools removes its own.
 
+7. Signed releases, and Zenodo
+------------------------------
+
+From 1.0.5 every release is signed with my key, the same as in my other
+projects: the tag, each file published (with its `FILE.asc`), and a
+`SHA256SUMS` of them, signed too. The public key goes with every release,
+and `tools/release.py` checks each signature with only that key, in a
+`GNUPGHOME` of its own, before anything is pushed; if one does not verify,
+nothing is published. The tests sign with a key made for them and thrown
+away.
+
+The release also prepares a deposit for Zenodo (`tools/zenodo.py`): the
+tree of the tag as a source archive, signed, with its sums and the public
+key. It is uploaded as a draft, a new version of the deposit when there is
+one, and never published by the tools; I review it on Zenodo first. The
+description of the deposit is the whole README of the tag. Some fields
+(the languages, the copyright, the repository, the programming language)
+are not accepted by Zenodo's deposit API, so they are set afterwards
+through its records API, and the upload stops if Zenodo did not keep them.
+The token comes from `$ZENODO_TOKEN` or from the desktop keyring. The
+release itself failed at first for a small reason: the changelogs still
+said "Unreleased", and the test that checks the version stopped it before
+anything was built. The tests now run in parallel, each file in a process
+of its own (`tools/test.py`).
+
 Testing
 -------
 
-There are 27 tests, run with pytest. Eleven are of the engine: the words of
+There are 47 tests, run with pytest, each file in a process of its own. Eleven are of the engine: the words of
 a page read in other processes, with their place and confidence, and
 written where the picture shows them; the doubtful words, with their
 pictures; the reading stopped; the error of tesseract in the language of
@@ -156,7 +181,14 @@ command line: each command, the outputs, the report with one PDF and with
 several, the protected PDF and its key, and the errors. Two are of the
 interface: every text of the code is in the Spanish file, and none is
 there that the code does not use. One checks that the version is the same
-everywhere it is written. The tests run in folders of their own and never
+everywhere it is written. Three are of the signing of a release: every
+file signed and checked with the public key alone, a signature by another
+key refused, and the missing files named. Seventeen are of the deposit for
+Zenodo: the tree of the tag collected and signed, a changed package or a
+tag signed by another key stopping it, the metadata, the README as HTML,
+the token, and the upload against a Zenodo imitated on the machine, as a
+new draft or a new version, stopped by a draft waiting or by fields Zenodo
+did not keep, and sending nothing in a dry run. The tests run in folders of their own and never
 touch the user's settings or models. Those that read need tesseract with
 English; those that turn pages need the model `osd`, and use the user's if
 there is one.
@@ -165,6 +197,6 @@ The program was also run by hand on scans made for the purpose, in both
 languages, with `osd` downloaded from tesseract's repository and removed
 again, and with Ctrl+C sent to the whole group of processes in the middle
 of a reading. The installer for Linux was run in a home folder made for the
-test, and the AppImage with an empty environment. It has 17 files of
-Python, around 2,500 lines, and 281 texts of the interface in Spanish, 31
+test, and the AppImage with an empty environment. It has 22 files of
+Python, around 4,100 lines, and 281 texts of the interface in Spanish, 31
 of them argparse's own.

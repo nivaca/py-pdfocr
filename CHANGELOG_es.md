@@ -5,7 +5,7 @@ AppImages, están en
 [Codeberg](https://codeberg.org/nivaca/py-pdfocr/releases) y
 [GitHub](https://github.com/nivaca/py-pdfocr/releases).
 
-## Sin publicar
+## 1.0.5 — 2026-11-25
 
 - `tools/zenodo.py`: la descripción del depósito es ahora el README entero
   de la etiqueta, en HTML. El borrador recibe además el colaborador (el

@@ -7,7 +7,7 @@ py-pdfocr es software libre, con la Licencia Pública General de GNU,
 versión 3 o posterior (GPL-3.0-or-later). Está construido sobre el software
 libre de esta lista: la biblioteca que importa, el programa que ejecuta y
 sus modelos, y las herramientas que lo hacen, lo prueban y lo empaquetan.
-Las versiones son las de py-pdfocr 1.0.4 (tal como las resuelve `uv.lock`);
+Las versiones son las de py-pdfocr 1.0.5 (tal como las resuelve `uv.lock`);
 `uv tree` muestra las de una versión posterior. Las licencias van con sus
 identificadores SPDX, tal como las declara cada proyecto.
 

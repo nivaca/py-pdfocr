@@ -7,7 +7,7 @@ py-pdfocr is free software, under the GNU General Public License, version 3
 or later (GPL-3.0-or-later). It is built on the open-source software listed
 here: the library it imports, the program it runs and its models, and the
 tools that build, test and package it. The versions are those of py-pdfocr
-1.0.4 (as `uv.lock` resolves them); `uv tree` shows those of any later
+1.0.5 (as `uv.lock` resolves them); `uv tree` shows those of any later
 version. Licences are given as SPDX identifiers, as each project declares
 them.
 
