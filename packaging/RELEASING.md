@@ -17,7 +17,7 @@
    signature, and checks every signature with only the public key; tags
    `vVERSION` with a signed tag; pushes to GitHub (`origin`) and Codeberg
    (`codeberg`); attaches the files, the signatures and the public key to
-   the release on both; and uploads the deposit for Zenodo as a draft.
+   the release on both; and uploads the deposit for Zenodo and publishes it.
    `--dry-run` only shows the commands.
 
 The AppImage (`tools/bundle-appimage.py`) downloads a Python of the
@@ -39,8 +39,9 @@ the tag as `py-pdfocr-VERSION-source.tar.gz`, its signature, a signed
 key. At the end of the release, `tools/zenodo.py upload` sends it to Zenodo
 as a draft, with the metadata of `.zenodo.json`; if Zenodo already has a
 published deposit with the same title, the draft is a new version of it.
-The draft is never published by these tools: review it on Zenodo and
-publish it there. The token (made at
+`tools/release.py` publishes it at the end, with a new DOI
+(`--zenodo-draft` leaves a draft, published later with
+`tools/zenodo.py publish`). The token (made at
 https://zenodo.org/account/settings/applications/, with deposit:write and
 deposit:actions) is kept once in the desktop keyring:
 

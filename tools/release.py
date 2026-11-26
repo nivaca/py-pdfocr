@@ -41,9 +41,9 @@ In order, each step only if it is needed:
 8. with --pypi, uploads the wheel and the source package to PyPI (uv publish,
    with the API token in $UV_PUBLISH_TOKEN). PyPI never takes a file twice:
    with --redo, those already there are skipped, not replaced;
-9. unless --no-zenodo, uploads dist/zenodo/ to Zenodo as a draft
-   (tools/zenodo.py upload). The draft is never published here: review it
-   and publish it on Zenodo by hand.
+9. unless --no-zenodo, uploads dist/zenodo/ to Zenodo and publishes it
+   (tools/zenodo.py upload --publish), with a new DOI; with --zenodo-draft
+   it is left as a draft, to publish by hand.
 
 Before doing anything, it shows the commands it will run and asks; --yes
 doesn't ask, --dry-run only shows them. The notes of a new release are
@@ -295,8 +295,10 @@ class Release:
         if a.pypi:
             self.pypi()
         if not a.no_zenodo:
-            self.plan("Zenodo: upload the deposit as a draft (not published)", sys.executable, "tools/zenodo.py",
-                      "upload")
+            self.plan("Zenodo: upload the deposit" + (" as a draft (not published)" if self.args.zenodo_draft
+                                                       else " and publish it"),
+                      sys.executable, "tools/zenodo.py", "upload",
+                      *([] if self.args.zenodo_draft else ["--publish"]))
         self.run_plan()
 
 
@@ -319,8 +321,10 @@ def main(argv=None):
     parser.add_argument("--only", choices=("github", "codeberg"), help="publish on one forge only")
     parser.add_argument("--tea-login", default="codeberg", help="the login of tea for Codeberg (default: codeberg)")
     parser.add_argument("--no-zenodo", action="store_true",
-                        help="don't upload the deposit to Zenodo (by default it goes as a draft, never published, "
-                             "with the token in $ZENODO_TOKEN or the keyring)")
+                        help="don't upload the deposit to Zenodo (by default it is uploaded and "
+                             "published, with the token in $ZENODO_TOKEN or the keyring)")
+    parser.add_argument("--zenodo-draft", action="store_true",
+                        help="upload it to Zenodo as a draft, not published")
     parser.add_argument("-n", "--dry-run", action="store_true", help="only show the commands")
     parser.add_argument("-y", "--yes", action="store_true", help="don't ask before running them")
     args = parser.parse_args(argv)
