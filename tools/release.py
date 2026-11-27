@@ -1,57 +1,58 @@
 #!/usr/bin/env python3
-"""Publish a release of py-pdfocr on GitHub (with gh) and Codeberg (with
-tea): the tag vVERSION (the version of pyproject.toml), signed, with the wheel,
-the source package, a ZIP of the source and the AppImage attached, each with its
-signature (FILE.asc), with SHA256SUMS and its signature, and with the public key
-that checks them all; the deposit of the release on Zenodo, as a draft; and
-(--pypi) the wheel and the source package on PyPI.
+"""Publica una versión de py-pdfocr en GitHub (con gh) y en Codeberg (con
+tea): la etiqueta vVERSIÓN (la versión de pyproject.toml), firmada, con la wheel,
+el paquete fuente, un ZIP del código y la AppImage adjuntos, cada uno con su
+firma (ARCHIVO.asc), con SHA256SUMS y su firma, y con la clave pública que
+las comprueba todas; el depósito de la versión en Zenodo, como borrador; y
+(--pypi) la wheel y el paquete fuente en PyPI.
 
-Everything is signed with the project's key (SIGNING_KEY, the same in all the
-author's projects), and every signature is checked, against the public key
-published (packaging/RPM-GPG-KEY-py-pdfocr), before anything is published.
+Todo se firma con la clave del proyecto (SIGNING_KEY, la misma en todos los
+proyectos del autor), y cada firma se comprueba con la clave pública que se
+publica (packaging/RPM-GPG-KEY-py-pdfocr), antes de publicar nada.
 
     uv run python tools/release.py [--notes TEXT | --notes-file FILE] [--pypi]
                                    [--no-build] [--no-appimage] [--no-tests] [--redo]
                                    [--only github|codeberg] [--no-zenodo] [--dry-run] [--yes]
 
-In order, each step only if it is needed:
+En orden, cada paso solo si hace falta:
 
-1. checks that the repository is on main, with nothing left to commit, that
-   the versions agree (pyproject.toml and __init__.py), that the tools are
-   installed (gh, tea, gpg), that the signing key is in gpg and, unless
-   --no-zenodo, that there is a Zenodo token in $ZENODO_TOKEN or the keyring;
-2. runs the tests, each file in a process of its own, at once
-   (tools/test.py; unless --no-tests);
-3. makes the wheel and the source package (uv build), the ZIP of the
-   source (git archive of HEAD) and the AppImage (tools/bundle-appimage.py)
-   in build/release/, unless --no-build (then those in build/release/ are
-   used); then signs every file (tools/sign_release.py: FILE.asc,
-   build/release/SHA256SUMS and its .asc), and checks each signature with
-   only the public key that is published; gpg asks for the passphrase;
-4. tags HEAD as vVERSION, a tag signed with the same key (git tag --sign),
-   and checks it (git tag --verify). If the tag is already on another
-   commit, it stops, unless --redo moves it;
-5. collects the deposit for Zenodo in build/zenodo/ (tools/zenodo.py collect:
-   the tree of the tag, signed, with SHA256SUMS and the public key, each
-   signature checked with only that key);
-6. pushes main and the tag to each remote (origin is GitHub, codeberg is
-   Codeberg; --redo pushes the tag with --force);
-7. on each forge, makes the release of the tag, or keeps the one there is,
-   and attaches the files to it, replacing those of the same name;
-8. with --pypi, uploads the wheel and the source package to PyPI (uv publish,
-   with the API token in $UV_PUBLISH_TOKEN). PyPI never takes a file twice:
-   with --redo, those already there are skipped, not replaced;
-9. unless --no-zenodo, uploads build/zenodo/ to Zenodo and publishes it
-   (tools/zenodo.py upload --publish), with a new DOI; with --zenodo-draft
-   it is left as a draft, to publish by hand;
-10. deletes build/release/ and build/zenodo/: the forges and Zenodo have
-   what they held, and nothing of a release is kept here (there is no RPM,
-   and dist/ is not used).
+1. comprueba que el repositorio esté en main, sin nada por confirmar, que
+   las versiones coincidan (pyproject.toml y __init__.py), que las
+   herramientas estén instaladas (gh, tea, gpg), que la clave de firma esté
+   en gpg y, salvo con --no-zenodo, que haya un token de Zenodo en
+   $ZENODO_TOKEN o en el llavero;
+2. corre las pruebas, cada archivo en un proceso propio, a la vez
+   (tools/test.py; salvo con --no-tests);
+3. hace la wheel y el paquete fuente (uv build), el ZIP del código
+   (git archive de HEAD) y la AppImage (tools/bundle-appimage.py) en
+   build/release/, salvo con --no-build (entonces se usan los que haya en
+   build/release/); luego firma cada archivo (tools/sign_release.py:
+   ARCHIVO.asc, build/release/SHA256SUMS y su .asc) y comprueba cada firma
+   solo con la clave pública que se publica; gpg pide la frase de contraseña;
+4. pone en HEAD la etiqueta vVERSIÓN, firmada con la misma clave (git tag
+   --sign), y la comprueba (git tag --verify). Si la etiqueta ya está en
+   otro commit, se detiene, salvo que --redo la mueva;
+5. reúne el depósito para Zenodo en build/zenodo/ (tools/zenodo.py collect:
+   el árbol de la etiqueta, firmado, con SHA256SUMS y la clave pública, y
+   cada firma comprobada solo con esa clave);
+6. sube main y la etiqueta a cada remoto (origin es GitHub, codeberg es
+   Codeberg; --redo sube la etiqueta con --force);
+7. en cada forja, hace la versión de la etiqueta, o conserva la que haya,
+   y le adjunta los archivos, en lugar de los que tengan el mismo nombre;
+8. con --pypi, sube la wheel y el paquete fuente a PyPI (uv publish, con el
+   token de la API en $UV_PUBLISH_TOKEN). PyPI nunca acepta dos veces un
+   archivo: con --redo, los que ya están se saltan, no se reemplazan;
+9. salvo con --no-zenodo, sube build/zenodo/ a Zenodo y lo publica
+   (tools/zenodo.py upload --publish), con un DOI nuevo; con --zenodo-draft
+   queda como borrador, para publicarlo a mano;
+10. borra build/release/ y build/zenodo/: las forjas y Zenodo ya tienen lo
+   que contenían, y aquí no se guarda nada de una versión (no hay RPM, y
+   dist/ no se usa).
 
-Before doing anything, it shows the commands it will run and asks; --yes
-doesn't ask, --dry-run only shows them. The notes of a new release are
---notes, --notes-file, or else made by GitHub from the commits (on Codeberg,
-none); a release that is there keeps its notes.
+Antes de hacer nada, muestra las órdenes que va a correr y pregunta; con
+--yes no pregunta, y con --dry-run solo las muestra. Las notas de una versión
+nueva son --notes, --notes-file o, si no, las que hace GitHub con los commits
+(en Codeberg, ninguna); una versión que ya está conserva sus notas.
 """
 
 from __future__ import annotations

@@ -1,4 +1,4 @@
-"""The texts of the interface in the code (those given to tr, ntr and N_), for locale/es.xml and its test."""
+"""Los textos de la interfaz que hay en el código (los que reciben tr, ntr y N_), para locale/es.xml y su prueba."""
 
 from __future__ import annotations
 

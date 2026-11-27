@@ -1,24 +1,23 @@
 #!/usr/bin/env python3
-"""Make an AppImage of py-pdfocr, for Linux:
+"""Hace una AppImage de py-pdfocr, para Linux:
 
-    uv run python tools/bundle-appimage.py [-o FOLDER] [--python APPIMAGE]
+    uv run python tools/bundle-appimage.py [-o CARPETA] [--python APPIMAGE]
                                           [--python-version 3.14] [--appimagetool APPIMAGE]
 
-The AppImage is build/release/py-pdfocr-VERSION-x86_64.AppImage (the version of
-pyproject.toml; --output gives another folder). It holds a Python of its own
-(a relocatable Python of the python-appimage project,
-https://github.com/niess/python-appimage) with py-pdfocr and PyMuPDF
-installed into it, so it runs on any recent Linux (glibc 2.28 or later)
-without installing anything but tesseract, which it runs as the system has
-it:
+La AppImage es build/release/py-pdfocr-VERSIÓN-x86_64.AppImage (la versión de
+pyproject.toml; --output da otra carpeta). Lleva un Python propio (uno
+reubicable del proyecto python-appimage, https://github.com/niess/python-appimage)
+con py-pdfocr y PyMuPDF instalados dentro; así corre en cualquier Linux
+reciente (glibc 2.28 o posterior) sin instalar nada más que tesseract, que
+ejecuta tal como lo tenga el sistema:
 
     py-pdfocr.AppImage scan.pdf -l lat+spa
     py-pdfocr.AppImage languages
 
-What it needs is downloaded the first time and kept in the user's cache
-folder (~/.cache/py-pdfocr-build): the Python and appimagetool
-(https://github.com/AppImage/appimagetool). The program's wheel is made with
-"uv build", and its dependencies come from PyPI (so this needs the network).
+Lo que necesita se descarga la primera vez y queda en la caché del usuario
+(~/.cache/py-pdfocr-build): el Python y appimagetool
+(https://github.com/AppImage/appimagetool). La wheel del programa la hace
+"uv build", y sus dependencias vienen de PyPI (por eso hace falta la red).
 """
 
 from __future__ import annotations
