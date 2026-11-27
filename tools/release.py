@@ -24,14 +24,14 @@ In order, each step only if it is needed:
    (tools/test.py; unless --no-tests);
 3. makes the wheel and the source package (uv build), the ZIP of the
    source (git archive of HEAD) and the AppImage (tools/bundle-appimage.py)
-   in dist/, unless --no-build (then those in dist/ are used); then signs
-   every file (tools/sign_release.py: FILE.asc, dist/SHA256SUMS and its
-   .asc), and checks each signature with only the public key that is
-   published; gpg asks for the passphrase;
+   in build/release/, unless --no-build (then those in build/release/ are
+   used); then signs every file (tools/sign_release.py: FILE.asc,
+   build/release/SHA256SUMS and its .asc), and checks each signature with
+   only the public key that is published; gpg asks for the passphrase;
 4. tags HEAD as vVERSION, a tag signed with the same key (git tag --sign),
    and checks it (git tag --verify). If the tag is already on another
    commit, it stops, unless --redo moves it;
-5. collects the deposit for Zenodo in dist/zenodo/ (tools/zenodo.py collect:
+5. collects the deposit for Zenodo in build/zenodo/ (tools/zenodo.py collect:
    the tree of the tag, signed, with SHA256SUMS and the public key, each
    signature checked with only that key);
 6. pushes main and the tag to each remote (origin is GitHub, codeberg is
@@ -41,9 +41,12 @@ In order, each step only if it is needed:
 8. with --pypi, uploads the wheel and the source package to PyPI (uv publish,
    with the API token in $UV_PUBLISH_TOKEN). PyPI never takes a file twice:
    with --redo, those already there are skipped, not replaced;
-9. unless --no-zenodo, uploads dist/zenodo/ to Zenodo and publishes it
+9. unless --no-zenodo, uploads build/zenodo/ to Zenodo and publishes it
    (tools/zenodo.py upload --publish), with a new DOI; with --zenodo-draft
-   it is left as a draft, to publish by hand.
+   it is left as a draft, to publish by hand;
+10. deletes build/release/ and build/zenodo/: the forges and Zenodo have
+   what they held, and nothing of a release is kept here (there is no RPM,
+   and dist/ is not used).
 
 Before doing anything, it shows the commands it will run and asks; --yes
 doesn't ask, --dry-run only shows them. The notes of a new release are
@@ -69,16 +72,19 @@ VERSION = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]["versi
 TAG = f"v{VERSION}"
 TITLE = f"py-pdfocr {VERSION}"
 BRANCH = "main"
-WHEEL = f"dist/py_pdfocr-{VERSION}-py3-none-any.whl"
-SDIST = f"dist/py_pdfocr-{VERSION}.tar.gz"
-ZIP = f"dist/py-pdfocr-{VERSION}.zip"
-APPIMAGE = f"dist/py-pdfocr-{VERSION}-x86_64.AppImage"
+# Lo que se publica se hace y se firma en build/release/, no en dist/: aquí no se guarda nada de una versión
+# una vez publicada (no hay RPM)
+OUT = "build/release"
+WHEEL = f"{OUT}/py_pdfocr-{VERSION}-py3-none-any.whl"
+SDIST = f"{OUT}/py_pdfocr-{VERSION}.tar.gz"
+ZIP = f"{OUT}/py-pdfocr-{VERSION}.zip"
+APPIMAGE = f"{OUT}/py-pdfocr-{VERSION}-x86_64.AppImage"
 REMOTES = {"github": "origin", "codeberg": "codeberg"}
 # La clave con que se firma todo lo publicado: la misma en todos los proyectos del autor (la que fija
 # packaging/build-rpm.sh en los que hacen un RPM)
 SIGNING_KEY = "81870643CA221AF90C30554EBE6832CD35994948"
 PUBLIC_KEY = "packaging/RPM-GPG-KEY-py-pdfocr"  # (the public key published with every release)
-SUMS = "dist/SHA256SUMS"
+SUMS = f"{OUT}/SHA256SUMS"
 
 
 def zenodo_token() -> bool:
@@ -188,11 +194,13 @@ class Release:
                 if not (ROOT / f).is_file():
                     sys.exit(f"release.py: there is no {f} (leave out --no-build to make it)")
             return
-        self.plan("Make the wheel and the source package", "uv", "build", "--out-dir", "dist")
+        if not self.args.dry_run:
+            (ROOT / OUT).mkdir(parents=True, exist_ok=True)
+        self.plan("Make the wheel and the source package", "uv", "build", "--out-dir", OUT)
         self.plan("Make the ZIP of the source", "git", "archive", "--format=zip", f"--prefix=py-pdfocr-{VERSION}/",
                   "--output", ZIP, "HEAD")
         if APPIMAGE in self.files:
-            self.plan("Make the AppImage", "uv", "run", "python", "tools/bundle-appimage.py")
+            self.plan("Make the AppImage", "uv", "run", "python", "tools/bundle-appimage.py", "--output", OUT)
 
     def sign(self):
         """Every file published signed (FILE.asc), with SHA256SUMS and its signature, and each signature checked
@@ -217,7 +225,7 @@ class Release:
                       "--sign", "--local-user", SIGNING_KEY, TAG, "--message", TITLE)
             self.plan("Check the signature of the tag", "git", "tag", "--verify", TAG)
         # El depósito para Zenodo, de la etiqueta (se sube al final)
-        self.plan("Zenodo: collect the deposit in dist/zenodo/", sys.executable, "tools/zenodo.py", "collect",
+        self.plan("Zenodo: collect the deposit in build/zenodo/", sys.executable, "tools/zenodo.py", "collect",
                   "--tag", TAG)
         for forge in self.forges:
             remote = REMOTES[forge]
@@ -299,6 +307,9 @@ class Release:
                                                        else " and publish it"),
                       sys.executable, "tools/zenodo.py", "upload",
                       *([] if self.args.zenodo_draft else ["--publish"]))
+        # Once all is published, nothing of it stays here: the forges and Zenodo have it
+        self.plan("Delete what was published from build/ (the forges and Zenodo have it)", "rm", "-rf", OUT,
+                  "build/zenodo")
         self.run_plan()
 
 
@@ -312,7 +323,7 @@ def main(argv=None):
     notes.add_argument("--notes-file", metavar="FILE", help="the notes of a new release, from FILE")
     parser.add_argument("--pypi", action="store_true",
                         help="also upload the wheel and the source package to PyPI ($UV_PUBLISH_TOKEN)")
-    parser.add_argument("--no-build", action="store_true", help="use the files in dist/ as they are")
+    parser.add_argument("--no-build", action="store_true", help="use the files in build/release/ as they are")
     parser.add_argument("--no-appimage", action="store_true", help="without the AppImage")
     parser.add_argument("--no-tests", action="store_true", help="don't run the tests first")
     parser.add_argument("--redo", action="store_true",

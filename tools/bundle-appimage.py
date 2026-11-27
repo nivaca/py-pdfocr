@@ -4,7 +4,7 @@
     uv run python tools/bundle-appimage.py [-o FOLDER] [--python APPIMAGE]
                                           [--python-version 3.14] [--appimagetool APPIMAGE]
 
-The AppImage is dist/py-pdfocr-VERSION-x86_64.AppImage (the version of
+The AppImage is build/release/py-pdfocr-VERSION-x86_64.AppImage (the version of
 pyproject.toml; --output gives another folder). It holds a Python of its own
 (a relocatable Python of the python-appimage project,
 https://github.com/niess/python-appimage) with py-pdfocr and PyMuPDF
@@ -36,7 +36,9 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-DIST = ROOT / "dist"
+# Donde queda, si no se pide otra carpeta: build/release/, donde tools/release.py lo firma y desde donde lo
+# publica (y luego lo borra)
+OUT = ROOT / "build" / "release"
 APP_ID = "py-pdfocr"
 ARCH = "x86_64"
 VERSION = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]["version"]
@@ -235,7 +237,7 @@ def main(argv=None):
                                      description=f"Make an AppImage of py-pdfocr: {name()}, with a Python of "
                                                  "its own.")
     parser.add_argument("-o", "--output", type=Path, default=None,
-                        help="the folder to write it in (default: dist/)")
+                        help="the folder to write it in (default: build/release/)")
     parser.add_argument("--python", type=Path, metavar="APPIMAGE",
                         help="the Python AppImage to use (default: one of python-appimage, downloaded)")
     parser.add_argument("--python-version", default=PYTHON, metavar="VERSION",
@@ -245,7 +247,7 @@ def main(argv=None):
     args = parser.parse_args(argv)
     if not sys.platform.startswith("linux"):
         sys.exit("bundle-appimage.py: AppImages are made on Linux")
-    output = args.output or DIST
+    output = args.output or OUT
     output.mkdir(parents=True, exist_ok=True)
     try:
         path = bundle(output, args.python, args.appimagetool, args.python_version)

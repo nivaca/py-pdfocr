@@ -7,6 +7,12 @@ and AppImages, are on
 
 ## Unreleased
 
+- Nothing of a release is kept here any more: `tools/release.py` makes and
+  signs the wheel, the source package, the ZIP, the AppImage and
+  `SHA256SUMS` in `build/release/` (not `dist/`), and the deposit for
+  Zenodo in `build/zenodo/`, publishes them from there and deletes both at
+  the end. `tools/bundle-appimage.py` writes to `build/release/` by
+  default.
 - `tools/zenodo.py`: the description of the deposit leaves out the line
   that points to the README in other languages and the Screenshots section,
   whose images Zenodo does not show.

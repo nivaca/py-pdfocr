@@ -13,11 +13,13 @@
 
    This runs the tests (`tools/test.py`, each file in a process of its own);
    makes the wheel, the source package, the ZIP of the source and the
-   AppImage in `dist/`; signs each of them, with `SHA256SUMS` and its
+   AppImage in `build/release/` (not `dist/`); signs each of them, with `SHA256SUMS` and its
    signature, and checks every signature with only the public key; tags
    `vVERSION` with a signed tag; pushes to GitHub (`origin`) and Codeberg
    (`codeberg`); attaches the files, the signatures and the public key to
    the release on both; and uploads the deposit for Zenodo and publishes it.
+   At the end it deletes `build/release/` and `build/zenodo/`, once
+   published: nothing of a release is kept here.
    `--dry-run` only shows the commands.
 
 The AppImage (`tools/bundle-appimage.py`) downloads a Python of the
@@ -33,7 +35,7 @@ the passphrase when the release signs.
 
 ## Zenodo
 
-After the tag, `tools/zenodo.py collect` puts in `dist/zenodo/` the tree of
+After the tag, `tools/zenodo.py collect` puts in `build/zenodo/` the tree of
 the tag as `py-pdfocr-VERSION-source.tar.gz`, its signature, a signed
 `SHA256SUMS` and the public key, and checks every signature with only that
 key. At the end of the release, `tools/zenodo.py upload` sends it to Zenodo

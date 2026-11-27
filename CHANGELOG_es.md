@@ -7,6 +7,12 @@ AppImages, están en
 
 ## Sin publicar
 
+- Ya no se guarda aquí nada de una versión: `tools/release.py` hace y firma
+  la rueda, el paquete de fuentes, el ZIP, la AppImage y `SHA256SUMS` en
+  `build/release/` (no en `dist/`), y el depósito para Zenodo en
+  `build/zenodo/`, los publica desde allí y al final borra las dos
+  carpetas. `tools/bundle-appimage.py` escribe por omisión en
+  `build/release/`.
 - `tools/zenodo.py`: la descripción del depósito deja fuera la línea que
   lleva a los README en otras lenguas y la sección Screenshots, cuyas
   imágenes Zenodo no muestra.
