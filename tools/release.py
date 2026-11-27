@@ -3,7 +3,8 @@
 tea): la etiqueta vVERSIÓN (la versión de pyproject.toml), firmada, con la wheel,
 el paquete fuente, un ZIP del código y la AppImage adjuntos, cada uno con su
 firma (ARCHIVO.asc), con SHA256SUMS y su firma, y con la clave pública que
-las comprueba todas; el depósito de la versión en Zenodo, como borrador; y
+las comprueba todas; el depósito de la versión en Zenodo, publicado (con
+--zenodo-draft, solo como borrador); y
 (--pypi) la wheel y el paquete fuente en PyPI.
 
 Todo se firma con la clave del proyecto (SIGNING_KEY, la misma en todos los
